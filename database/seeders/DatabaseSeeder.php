@@ -38,5 +38,12 @@ class DatabaseSeeder extends Seeder
             'harga' => '45000',
             'stok' => 19
         ]);
+
+        $this->call([
+            CategorySeeder::class,
+            SupplierSeeder::class,
+            ]);
+            
+        \App\Models\Product::factory(50)->create();
     }
 }
