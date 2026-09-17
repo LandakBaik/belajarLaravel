@@ -1,7 +1,7 @@
 <?php
 
 namespace Database\Seeders;
-
+use App\Models\Book;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -25,6 +25,18 @@ class DatabaseSeeder extends Seeder
             'name' => 'Jane Doe',
             'email' => 'jane.doe@example.com',
             'role' => 'admin',
+        ]);
+
+        Book::create([
+            'nama' => 'Bercerita',
+            'harga' => '15000',
+            'stok' => 10
+        ]);
+
+        Book::create([
+            'nama' => 'Terharu',
+            'harga' => '45000',
+            'stok' => 19
         ]);
     }
 }

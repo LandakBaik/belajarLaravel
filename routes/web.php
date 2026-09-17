@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\ApiBookController;
+use App\Http\Controllers\BookController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\LaporanPenjualanController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 
@@ -93,3 +96,8 @@ Route::get('/produk-toko', function () {
 
     return view('daftar_produk', compact('produk'));
 });
+
+route::apiResource('book', ApiBookController::class);
+route::resource('book', BookController::class);
+
+route::get('/laporan', LaporanPenjualanController::class);
