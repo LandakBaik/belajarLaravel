@@ -6,6 +6,8 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\LaporanPenjualanController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\FormController;
+use App\Http\Controllers\UserController;
 
 Route::get('/posts', [PostController::class,'index']);
 
@@ -101,3 +103,33 @@ route::apiResource('book', ApiBookController::class);
 route::resource('book', BookController::class);
 
 route::get('/laporan', LaporanPenjualanController::class);
+
+Route::get('/users/insert', [UserController::class, 'insertData']);
+Route::get('/users/read', [UserController::class, 'readData']);
+// Route::get('/users/update', [UserController::class, 'updateData']);
+// Route::get('/users/delete', [UserController::class, 'deleteData']);
+Route::get('/users/pluck', [UserController::class, 'pluckData']);
+Route::get('/users/aggregate', [UserController::class, 'aggregateData']);
+Route::get('/users/join', [UserController::class, 'joinData']);
+Route::get('/users/ordering', [UserController::class, 'orderingAndPaging']);
+Route::get('/users/subquery', [UserController::class, 'subqueryData']);
+Route::get('/users/raw', [UserController::class, 'rawQueryData']);
+
+Route::get('/eloquent/create', [UserController::class, 'storeData']);
+Route::get('/eloquent/read', [UserController::class, 'retrieveData']);
+Route::get('/eloquent/update', [UserController::class, 'updateData']);
+Route::get('/eloquent/delete', [UserController::class, 'deleteData']);
+
+Route::get('/eloquent/conditionals', [UserController::class, 'conditionalQueries']);
+Route::get('/eloquent/accessor', [UserController::class, 'showAccessor']);
+Route::get('/eloquent/soft-deletes', [UserController::class, 'handleSoftDeletes']);
+Route::get('/eloquent/scope', [UserController::class, 'showActiveUsers']);
+
+
+// 1. Route untuk MENAMPILKAN halaman form (Method: GET)
+Route::get('/form', function () {
+    return view('form'); // Mengakses file resources/views/form.blade.php
+});
+
+// 2. Route untuk MEMPROSES data dari form (Method: POST)
+Route::post('/submit', [FormController::class, 'submitForm']);
