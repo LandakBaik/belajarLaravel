@@ -7,21 +7,23 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\Log;
 
 class CheckRole
 {
     public function handle(Request $request, Closure $next, string $role): Response
     {
-        // 1. Cek apakah user sudah login
-        if (!Auth::check()) {
-            return redirect('/login');
-        }
-
-        // 2. Cek apakah role user sesuai dengan aturan rute
-        if (Auth::user()->role !== $role) {
-            abort(403, 'Anda tidak memiliki akses ke halaman ini.');
+        
+        if ($request->user()?->role !== $role) {
+            return response()->json(['message' => 'Akses ditolak!'], 403);
         }
 
         return $next($request);
     }
+
+    public function terminate(Request $request, Response $response): void
+    {
+        Log::info('Request selesai', ['url' => $request->fullUrl()]);
+    }
+
 }

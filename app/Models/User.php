@@ -2,12 +2,12 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\SoftDeletes; // Import SoftDeletes trait
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 
-class User extends Model
+class User extends Authenticatable
 {
     use HasFactory;
     // 4a) Menambahkan Soft Deletes pada Model
@@ -42,10 +42,10 @@ class User extends Model
     // 3) Mutators & Accessors
     
     // a) Mutator (Mengubah data sebelum disimpan)
-    public function setPasswordAttribute($value)
-    {
-        $this->attributes['password'] = bcrypt($value);
-    }
+    // public function setPasswordAttribute($value)
+    // {
+    //     $this->attributes['password'] = bcrypt($value);
+    // }
 
     // b) Accessor (Mengubah data sebelum ditampilkan)
     public function getFullNameAttribute()

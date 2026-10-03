@@ -24,7 +24,7 @@ class AuthController extends Controller
 
             // DI SINI LOGIKA PENGALIHAN BERDASARKAN ROLE
             if (Auth::user()->role === 'admin') {
-                return redirect()->intended('/admin/dashboard');
+                return redirect()->intended('/admin');
             }
 
             return redirect()->intended('/user/dashboard');

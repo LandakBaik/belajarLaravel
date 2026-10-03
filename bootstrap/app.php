@@ -12,8 +12,17 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->alias([
-        'checkrole' => \App\Http\Middleware\CheckRole::class, // Daftarkan di sini
-    ]);
+        // a) Jika didaftarkan sebagai Alias / Route Middleware:
+        'checkrole' => \App\Http\Middleware\CheckRole::class,
+        'admin' => \App\Http\Middleware\Admin::class,
+        ]);
+        // b) Jika ingin dijadikan Global Middleware (aktif di semua request):
+        // $middleware->append(\App\Http\Middleware\Admin::class);
+
+        // c) Jika ingin dimasukkan ke Middleware Group (contoh: group web):
+        // $middleware->appendToGroup('web', [
+        //     \App\Http\Middleware\Admin::class,
+        // ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //
